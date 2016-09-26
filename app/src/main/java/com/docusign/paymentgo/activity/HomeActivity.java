@@ -1,0 +1,118 @@
+package com.docusign.paymentgo.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.docusign.paymentgo.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.tv_welcome)
+    TextView tvWelcome;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+    String mUserName;
+    ActionBarDrawerToggle mDrawerToggle;
+    Toolbar toolbar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
+        Intent intent = getIntent();
+        if (intent != null) {
+            mUserName = intent.getStringExtra(LoginActivity.EMAIL);
+        }
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        initNavDrawer();
+        tvWelcome.setText(getResources().getText(R.string.welcome_msg) + " " + mUserName.substring(0, mUserName.indexOf("@")) + "!!");
+    }
+
+    public static Intent createIntent(Context frmCtx, String userName) {
+        Intent intent = new Intent(frmCtx, HomeActivity.class);
+        intent.putExtra(LoginActivity.EMAIL, userName);
+        return intent;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void initNavDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        navigationView.setNavigationItemSelectedListener(this);
+        View header = navigationView.getHeaderView(0);
+        TextView tvProfileEmail = ButterKnife.findById(header, R.id.tvProfileEmail);
+        tvProfileEmail.setText(mUserName);
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        drawer.addDrawerListener(mDrawerToggle);
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.payment_history) {
+            Toast.makeText(this, "Payment History", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_logout) {
+            Handler h = new Handler();
+            //Delay to simulate n/w call
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    logoutUser();
+                }
+            }, 1000);
+        }
+        return true;
+    }
+
+    private void logoutUser() {
+        Intent i = new Intent(this, LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+}

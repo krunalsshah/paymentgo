@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/side_nav_bar"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/forty_dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/forty_dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/ivProfilePic"
+        android:layout_width="@dimen/hundred_dp"
+        android:layout_height="@dimen/hundred_dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/profile_picture"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:scaleType="fitCenter"
+        app:srcCompat="@mipmap/user_profile" />
+
+    <TextView
+        android:id="@+id/tvProfileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hint_email"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"/>
+</LinearLayout>

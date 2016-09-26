@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlLogin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey"
+    android:descendantFocusability="beforeDescendants"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fifteen_dp"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="@dimen/fifteen_sp"
+        android:visibility="gone"
+        android:text="@string/login_error"
+        android:id="@+id/tv_error"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/fifteen_sp"
+        android:layout_below="@id/tv_error"/>
+
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etUsername"
+        android:hint="@string/hint_label_pwd"
+        android:inputType="textPassword"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/fifteen_sp" />
+
+    <CheckBox
+        android:id="@+id/cbRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/fifteen_dp"
+        android:text="@string/cb_remember_me" />
+
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ivAppLogo"
+        android:indeterminateTint="@color/colorAccent"
+        android:layout_marginTop="@dimen/seventy_dp"
+        android:layout_gravity="center"
+        android:id="@+id/progressbar"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/btPrimaryAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cbRememberMe"
+        android:layout_marginTop="@dimen/fifteen_dp"
+        android:background="@color/colorAccent"
+        android:text="@string/bt_login" />
+
+</RelativeLayout>
+
+
