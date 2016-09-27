@@ -14,8 +14,12 @@
     <string name="navigation_drawer_close">Drawer Close</string>
     <string name="endingIn">Card ending in </string>
     <string name="validationErrors">Validation Errors</string>
-    <string name="expDate">MM/YY</string>
+    <string name="expDate">MM/YYYY</string>
     <string name="cardNumber">Card Number</string>
     <string name="cvc">CVC</string>
     <string name="ok">OK</string>
+    <string name="cardNumber_error">Enter Card Number</string>
+    <string name="expDate_error">Enter Expiration Date</string>
+    <string name="cvc_error">Enter CVC</string>
+    <string name="amount_error">Enter Amount</string>
 </resources>

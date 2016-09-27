@@ -3,14 +3,13 @@ package com.docusign.paymentgo.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,11 +19,14 @@ import android.widget.Toast;
 
 import com.docusign.paymentgo.R;
 import com.docusign.paymentgo.fragment.HomeFragment;
+import com.docusign.paymentgo.fragment.PayFragment;
+import com.stripe.android.model.Token;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.HomeFragmentListener {
+public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
+        PayFragment.PayFragmentListener, HomeFragment.HomeFragmentListener {
 
     public static final String TAG = BaseActivity.class.getCanonicalName();
     public static final String EMAIL = "userEmail";
@@ -36,6 +38,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     ActionBarDrawerToggle mDrawerToggle;
     Toolbar toolbar;
     HomeFragment mHomeFragment;
+    PayFragment mPayFragment;
+
+    public static Intent createIntent(Context frmCtx, String userName) {
+        Intent intent = new Intent(frmCtx, HomeActivity.class);
+        intent.putExtra(LoginActivity.EMAIL, userName);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +70,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             mHomeFragment = HomeFragment.newInstance(mUserName);
             loadFragment(mHomeFragment, false, R.id.flHome, HomeFragment.TAG);
         }
-    }
-
-    public static Intent createIntent(Context frmCtx, String userName) {
-        Intent intent = new Intent(frmCtx, HomeActivity.class);
-        intent.putExtra(LoginActivity.EMAIL, userName);
-        return intent;
     }
 
     @Override
@@ -136,16 +139,22 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void paymentResult() {
-        Log.d(TAG, "paymentResult");
-        //AlertDialog
-        this.finish();
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         //Save the fragment's instance
         getSupportFragmentManager().putFragment(outState, HomeFragment.TAG, mHomeFragment);
+    }
+
+    @Override
+    public void paymentCompleted(Token token) {
+        Log.d(TAG, "Token : " + token.getCard().getLast4());
+    }
+
+    @Override
+    public void onPayButtonClicked() {
+        if (mPayFragment == null) {
+            mPayFragment = PayFragment.newInstance();
+            loadFragment(mPayFragment, false, R.id.flHome, PayFragment.TAG);
+        }
     }
 }
