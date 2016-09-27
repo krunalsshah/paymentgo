@@ -6,15 +6,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_welcome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/five_dp"
             android:gravity="center_horizontal"
             android:text="@string/welcome_msg"
@@ -28,6 +28,8 @@
             android:layout_below="@id/tv_welcome"
             android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@mipmap/invoice_2" />
@@ -38,12 +40,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/ivInvoice"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:hint="@string/hint_amount"
             android:inputType="numberDecimal"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="@dimen/twenty_four_dp"
-            />
+            android:textSize="@dimen/twenty_four_dp" />
 
         <Button
             android:id="@+id/btPay"

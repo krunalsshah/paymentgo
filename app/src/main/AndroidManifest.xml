@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.docusign.paymentgo">
+    package="com.docusign.paysmart">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="PaymentGoApplication"
+        android:name="com.docusign.paysmart.PaySmartApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/invoice_pay"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.docusign.paysmart.activity.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,14 +21,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.HomeActivity"
+            android:name="com.docusign.paysmart.activity.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/app_name" />
+            android:name="com.docusign.paysmart.activity.LoginActivity"
+            android:label="@string/app_login" />
         <activity
-            android:name=".activity.PayResultActivity"
+            android:name="com.docusign.paysmart.activity.PayResultActivity"
             android:label="@string/app_name" />
 
     </application>

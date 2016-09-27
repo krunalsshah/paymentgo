@@ -1,1 +1,1 @@
-# paymentgo
+# Pay Smart
