@@ -9,6 +9,7 @@
     <dimen name="zero_dp">0dp</dimen>
     <dimen name="five_dp">5dp</dimen>
     <dimen name="two_hundred_dp">200dp</dimen>
+    <dimen name="one_fifty_dp">150dp</dimen>
     <dimen name="two_fifty_dp">250dp</dimen>
     <dimen name="three_fifty_dp">350dp</dimen>
     <dimen name="thirty_sp">30sp</dimen>

@@ -22,4 +22,6 @@
     <string name="expDate_error">Enter Expiration Date</string>
     <string name="cvc_error">Enter CVC</string>
     <string name="amount_error">Enter Amount</string>
+    <string name="success_msg">Your Payment has been processed via Stripe!</string>
+    <string name="done">Done</string>
 </resources>

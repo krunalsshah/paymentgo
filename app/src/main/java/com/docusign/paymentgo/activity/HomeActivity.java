@@ -148,6 +148,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void paymentCompleted(Token token) {
         Log.d(TAG, "Token : " + token.getCard().getLast4());
+        startActivity(PayResultActivity.createIntent(this));
+        this.finish();
     }
 
     @Override
