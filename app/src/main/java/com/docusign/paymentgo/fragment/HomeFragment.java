@@ -2,8 +2,6 @@ package com.docusign.paymentgo.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.docusign.paymentgo.R;
-import com.docusign.paymentgo.utils.AppendCurrencyTextWatcher;
+import com.docusign.paymentgo.utils.AppendCurrencySymbolTextWatcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnTextChanged;
 
 /**
  * Created by krshah on 9/26/16.
@@ -65,7 +62,7 @@ public class HomeFragment extends Fragment {
         if (mUserEmail != null) {
             mTvWelcome.setText(getResources().getText(R.string.welcome_msg) + " " + mUserEmail.substring(0, mUserEmail.indexOf("@")) + "!!");
         }
-        mEtAmt.addTextChangedListener( new AppendCurrencyTextWatcher(mEtAmt));
+        mEtAmt.addTextChangedListener( new AppendCurrencySymbolTextWatcher(mEtAmt));
         return root;
     }
 

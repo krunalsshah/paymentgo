@@ -8,11 +8,11 @@ import android.widget.EditText;
  * Created by krshah on 9/27/16.
  */
 
-public class AppendCurrencyTextWatcher implements TextWatcher {
+public class AppendCurrencySymbolTextWatcher implements TextWatcher {
 
     private EditText et;
 
-    public AppendCurrencyTextWatcher(EditText et) {
+    public AppendCurrencySymbolTextWatcher(EditText et) {
         this.et = et;
     }
 
@@ -31,8 +31,10 @@ public class AppendCurrencyTextWatcher implements TextWatcher {
         String input = et.getText().toString();
         if (input.length() > 1) {
             et.setText("$" + input.substring(1));
-        } else {
+        } else if(input.length() ==  1 && !input.equals("$")) {
             et.setText("$" + input);
+        } else {
+            et.setText("");
         }
         et.setSelection(et.getText().length());
         et.addTextChangedListener(this);
