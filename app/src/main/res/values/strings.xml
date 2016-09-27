@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">PaymentGo</string>
     <string name="hint_email">Email</string>
+    <string name="hint_amount">Enter Amount $</string>
     <string name="hint_label_pwd">Password</string>
     <string name="cb_remember_me">Remember Email </string>
     <string name="bt_login">LOGIN</string>
+    <string name="bt_pay">Stripe Pay</string>
     <string name="login_error">Wrong Login Information, Try Again!</string>
     <string name="welcome_msg">Welcome</string>
     <string name="profile_picture">Profile Picture</string>

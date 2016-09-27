@@ -6,25 +6,28 @@ import android.content.res.Configuration;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.docusign.paymentgo.R;
+import com.docusign.paymentgo.fragment.HomeFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.HomeFragmentListener {
 
-    @BindView(R.id.tv_welcome)
-    TextView tvWelcome;
+    public static final String TAG = BaseActivity.class.getCanonicalName();
+    public static final String EMAIL = "userEmail";
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
@@ -32,6 +35,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     String mUserName;
     ActionBarDrawerToggle mDrawerToggle;
     Toolbar toolbar;
+    HomeFragment mHomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +46,21 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         if (intent != null) {
             mUserName = intent.getStringExtra(LoginActivity.EMAIL);
         }
+        if (savedInstanceState == null) {
+            initFragments();
+        }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         initNavDrawer();
-        tvWelcome.setText(getResources().getText(R.string.welcome_msg) + " " + mUserName.substring(0, mUserName.indexOf("@")) + "!!");
+    }
+
+    private void initFragments() {
+        if (mHomeFragment == null) {
+            mHomeFragment = HomeFragment.newInstance(mUserName);
+            loadFragment(mHomeFragment, false, R.id.flHome, HomeFragment.TAG);
+        }
     }
 
     public static Intent createIntent(Context frmCtx, String userName) {
@@ -63,6 +76,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHomeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.TAG);
     }
 
     private void initNavDrawer() {
@@ -114,5 +133,19 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void paymentResult() {
+        Log.d(TAG, "paymentResult");
+        //AlertDialog
+        this.finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //Save the fragment's instance
+        getSupportFragmentManager().putFragment(outState, HomeFragment.TAG, mHomeFragment);
     }
 }
