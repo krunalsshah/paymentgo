@@ -109,7 +109,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 public void run() {
                     logoutUser();
                 }
-            }, 1000);
+            }, 500);
         }
         return true;
     }

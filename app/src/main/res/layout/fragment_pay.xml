@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fifteen_dp"
+        android:hint="@string/cardNumber"
+        android:inputType="number"
+        android:nextFocusDown="@+id/expMonth"
+        android:nextFocusForward="@+id/expMonth"
+        android:nextFocusRight="@+id/expMonth" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fifteen_dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/expMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.50"
+            android:hint="@string/expDate"
+            android:inputType="number"
+            android:nextFocusForward="@+id/expYear" />
+
+        <EditText
+            android:id="@+id/cvc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:hint="@string/cvc"
+            android:inputType="number"
+            android:nextFocusForward="@+id/save" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fifteen_dp"
+        android:background="@color/colorAccent"
+        android:text="@string/bt_pay_stripe" />
+
+</LinearLayout>

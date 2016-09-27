@@ -154,7 +154,7 @@ public class LoginFragment extends Fragment {
                         mShowError = true;
                     }
                 }
-            }, 1000);
+            }, 500);
         }
     }
 
