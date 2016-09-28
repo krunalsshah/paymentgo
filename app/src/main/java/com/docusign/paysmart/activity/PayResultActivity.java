@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.docusign.paysmart.R;
 
@@ -18,7 +19,9 @@ import butterknife.OnClick;
 public class PayResultActivity extends BaseActivity {
 
     @BindView(R.id.btDone)
-    Button mDone;
+    Button mBtnDone;
+    @BindView(R.id.ivSuccess)
+    ImageView mivSuccess;
 
     public static Intent createIntent(Context fromCtx) {
         return new Intent(fromCtx, PayResultActivity.class);
@@ -29,6 +32,7 @@ public class PayResultActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_result);
         ButterKnife.bind(this);
+        rotateCircular(mivSuccess, 1);
     }
 
     @OnClick(R.id.btDone)
@@ -36,5 +40,4 @@ public class PayResultActivity extends BaseActivity {
         startActivity(LoginActivity.createIntent(this));
         this.finish();
     }
-
 }

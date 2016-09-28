@@ -117,7 +117,7 @@ public class HomeFragment extends Fragment {
             return;
         }
         if (mCallback != null) {
-            mCallback.onPayButtonClicked();
+            mCallback.onPayButtonClicked(mEtAmt.getText().toString());
         }
     }
 
@@ -131,6 +131,6 @@ public class HomeFragment extends Fragment {
     }
 
     public interface HomeFragmentListener {
-        void onPayButtonClicked();
+        void onPayButtonClicked(String amount);
     }
 }

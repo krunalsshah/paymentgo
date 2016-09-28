@@ -3,8 +3,6 @@ package com.docusign.paysmart.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.docusign.paysmart.R;
@@ -24,7 +22,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
-        rotateCircular();
+        rotateCircular(mIvAppLogo, Animation.INFINITE);
         Handler h = new Handler();
         //Delay to simulate n/w call
         h.postDelayed(new Runnable() {
@@ -38,15 +36,5 @@ public class SplashActivity extends BaseActivity {
     private void launchSetup() {
         startActivity(LoginActivity.createIntent(this));
         this.finish();
-    }
-
-    private void rotateCircular() {
-        RotateAnimation rotateAnimation = new RotateAnimation(0, 360,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f);
-        rotateAnimation.setInterpolator(new LinearInterpolator());
-        rotateAnimation.setDuration(1000);
-        rotateAnimation.setRepeatCount(Animation.INFINITE);
-        mIvAppLogo.startAnimation(rotateAnimation);
     }
 }

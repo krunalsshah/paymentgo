@@ -11,7 +11,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -19,26 +18,26 @@ import android.widget.Toast;
 
 import com.docusign.paysmart.R;
 import com.docusign.paysmart.fragment.HomeFragment;
-import com.docusign.paysmart.fragment.PayFragment;
-import com.stripe.android.model.Token;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Landing page of the app
+ */
 public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
-        PayFragment.PayFragmentListener, HomeFragment.HomeFragmentListener {
+        HomeFragment.HomeFragmentListener {
 
-    public static final String TAG = BaseActivity.class.getCanonicalName();
-    public static final String EMAIL = "userEmail";
+    public static final String TAG = HomeActivity.class.getCanonicalName();
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     String mUserName;
     ActionBarDrawerToggle mDrawerToggle;
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     HomeFragment mHomeFragment;
-    PayFragment mPayFragment;
 
     public static Intent createIntent(Context frmCtx, String userName) {
         Intent intent = new Intent(frmCtx, HomeActivity.class);
@@ -58,7 +57,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         if (savedInstanceState == null) {
             initFragments();
         }
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -87,6 +85,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         mHomeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.TAG);
     }
 
+    //Initialize the Navigation Drawer
     private void initNavDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -146,17 +145,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void paymentCompleted(Token token) {
-        Log.d(TAG, "Token : " + token.getCard().getLast4());
-        startActivity(PayResultActivity.createIntent(this));
+    public void onPayButtonClicked(String amount) {
+        startActivity(PayActivity.createIntent(this, amount));
         this.finish();
-    }
-
-    @Override
-    public void onPayButtonClicked() {
-        if (mPayFragment == null) {
-            mPayFragment = PayFragment.newInstance();
-            loadFragment(mPayFragment, false, R.id.flHome, PayFragment.TAG);
-        }
     }
 }

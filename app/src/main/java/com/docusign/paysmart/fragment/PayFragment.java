@@ -45,7 +45,7 @@ public class PayFragment extends Fragment {
     private ProgressDialogFragment progressFragment;
     private PayFragmentListener mCallback;
 
-    public static PayFragment newInstance() {
+    public static PayFragment newInstance(String amount) {
         return new PayFragment();
     }
 
@@ -67,7 +67,7 @@ public class PayFragment extends Fragment {
         Card card = new Card(mEditTextCardNum.getText().toString(), Integer.valueOf(tokens[0]), Integer.valueOf(tokens[1]), mcvc.getText().toString());
         Stripe stripe = null;
         try {
-            stripe = new Stripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+            stripe = new Stripe(PUBLISHABLE_KEY);
         } catch (AuthenticationException e) {
             Log.e(TAG, e.getMessage());
         }

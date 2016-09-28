@@ -3,6 +3,7 @@
     <string name="app_login">Login</string>
     <string name="app_pay_result">Payment Result</string>
     <string name="hint_email">Email</string>
+    <string name="hint_name_company">Enter Name of Company</string>
     <string name="hint_amount">Enter Amount $</string>
     <string name="hint_label_pwd">Password</string>
     <string name="cb_remember_me">Remember Email </string>
@@ -26,4 +27,5 @@
     <string name="amount_error">Enter Amount</string>
     <string name="success_msg">Your Payment has been processed via Stripe!</string>
     <string name="bt_done">DONE</string>
+    <string name="app_pay">Pay Invoice</string>
 </resources>
