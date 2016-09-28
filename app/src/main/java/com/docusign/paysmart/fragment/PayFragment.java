@@ -10,11 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.docusign.paysmart.R;
 import com.docusign.paysmart.dialog.ErrorDialogFragment;
-import com.docusign.paysmart.dialog.ProgressDialogFragment;
 import com.docusign.paysmart.utils.FormatExpirationDateTextWatcher;
 import com.stripe.android.Stripe;
 import com.stripe.android.TokenCallback;
@@ -42,7 +40,6 @@ public class PayFragment extends Fragment {
     EditText mcvc;
     @BindView(R.id.paystripe)
     Button mStripePay;
-    private ProgressDialogFragment progressFragment;
     private PayFragmentListener mCallback;
 
     public static PayFragment newInstance(String amount) {
@@ -81,10 +78,7 @@ public class PayFragment extends Fragment {
 
                     public void onError(Exception error) {
                         // Show localized error message
-                        Toast.makeText(getContext(),
-                                error.getMessage(),
-                                Toast.LENGTH_LONG
-                        ).show();
+                        handleError(error.getLocalizedMessage());
                     }
                 }
         );
@@ -127,16 +121,8 @@ public class PayFragment extends Fragment {
         }
     }
 
-    private void startProgress() {
-        progressFragment.show(getActivity().getSupportFragmentManager(), "progress");
-    }
-
-    private void finishProgress() {
-        progressFragment.dismiss();
-    }
-
     private void handleError(String error) {
-        DialogFragment fragment = ErrorDialogFragment.newInstance(R.string.validationErrors, error);
+        DialogFragment fragment = ErrorDialogFragment.newInstance(error);
         fragment.show(getActivity().getSupportFragmentManager(), "error");
     }
 

@@ -34,7 +34,7 @@
             android:label="@string/app_pay" />
         <activity
             android:name="com.docusign.paysmart.activity.PayResultActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_pay_result" />
 
     </application>
 

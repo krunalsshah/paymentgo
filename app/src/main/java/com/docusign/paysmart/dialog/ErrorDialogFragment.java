@@ -14,26 +14,23 @@ import com.docusign.paysmart.R;
 
 public class ErrorDialogFragment extends DialogFragment {
 
+    public static final String MESSAGE = "msg";
     public ErrorDialogFragment() {
         // Empty constructor required for DialogFragment
     }
 
-    public static ErrorDialogFragment newInstance(int titleId, String message) {
+    public static ErrorDialogFragment newInstance(String message) {
         ErrorDialogFragment fragment = new ErrorDialogFragment();
         Bundle args = new Bundle();
-        args.putInt("titleId", titleId);
-        args.putString("messageId", message);
+        args.putString(MESSAGE, message);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        int titleId = getArguments().getInt("titleId");
-        String message = getArguments().getString("message");
-
+        String message = getArguments().getString(MESSAGE);
         return new AlertDialog.Builder(getActivity())
-                .setTitle(titleId)
                 .setMessage(message)
                 .setPositiveButton(
                         R.string.ok, new DialogInterface.OnClickListener() {
