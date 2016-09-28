@@ -21,14 +21,26 @@ The app integrates with Stripe to make invoice payment. Find more details - http
 	-   Currency Symbol auto formatting
 	-   Welcome <user-name>
 	-   Bonus :
-	        *  Floating action button to zoom invoice
-            *  Navigation Drawer
+	        *   Floating action button to zoom invoice
+            *   Navigation Drawer
 
 ####Logout
 	-   Logout via Navigation Drawer
 	-   Bonus
-	    *	User Profile header
+	        *   User Profile header
 
+####Collect Payment [Bonus]
+    -   Custom Form for collecting card information
+    ⁃	Inline Validation
+    ⁃	Auto formatting expiration date
+    ⁃	Integration with Stripe
+    ⁃	Orientation Change
+    ⁃	Alert Dialog to report Server Error from Stripe
+
+
+####Pay Success [Bonus]
+    -   Feedback to user on success of invoice payment
+	-  	Done button to take user back to login page
 
 ### Todos
 	-   Unit Test
