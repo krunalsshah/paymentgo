@@ -37,7 +37,9 @@ public class LoginFragment extends Fragment {
     private static String USER_PWD = "userPwd";
     private static String IS_REMEMBERED = "isRemembered";
     private static String SHOW_ERROR = "showError";
-    @BindView(R.id.tv_error)
+    private static String SHOW_U_ERROR = "userError";
+    private static String SHOW_P_ERROR = "pwderror";
+    @BindView(R.id.tvError)
     TextView mLoginError;
     @BindView(R.id.etUsername)
     EditText etUsername;
@@ -47,9 +49,15 @@ public class LoginFragment extends Fragment {
     CheckBox cbRememberMe;
     @BindView(R.id.progressbar)
     ProgressBar mProgressBar;
+    @BindView(R.id.tvUserNameError)
+    TextView tvUserNameError;
+    @BindView(R.id.tvPwdError)
+    TextView tvPwdError;
     private String mRememberedName;
     private LoginFragmentListener mCallback;
     private boolean mShowError;
+    private boolean mShowUserError;
+    private boolean mShowPwdError;
     private List<User> mUserStore;
 
     public static LoginFragment newInstance() {
@@ -66,6 +74,7 @@ public class LoginFragment extends Fragment {
 
     /**
      * Retain State
+     *
      * @param savedInstanceState
      */
     @Override
@@ -77,6 +86,12 @@ public class LoginFragment extends Fragment {
             cbRememberMe.setChecked(savedInstanceState.getBoolean(IS_REMEMBERED));
             if (savedInstanceState.getBoolean(SHOW_ERROR) == true) {
                 mLoginError.setVisibility(View.VISIBLE);
+            }
+            if (savedInstanceState.getBoolean(SHOW_U_ERROR) == true) {
+                tvUserNameError.setVisibility(View.VISIBLE);
+            }
+            if (savedInstanceState.getBoolean(SHOW_P_ERROR) == true) {
+                tvPwdError.setVisibility(View.VISIBLE);
             }
         }
 
@@ -121,33 +136,48 @@ public class LoginFragment extends Fragment {
     @OnClick(R.id.btPrimaryAction)
     public void signInClicked() {
         mLoginError.setVisibility(View.GONE);
+        tvUserNameError.setVisibility(View.GONE);
+        tvPwdError.setVisibility(View.GONE);
         mShowError = false;
+        mShowUserError = false;
+        mShowPwdError = false;
         final String userName = etUsername.getText().toString();
         final String password = etPassword.getText().toString();
-        boolean rememberMe = cbRememberMe.isChecked();
-        if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
-            if (rememberMe) {
-                RememberedData.setUserEmail(userName);
-            } else {
-                RememberedData.setUserEmail("");
-            }
-            mUserStore = Helpers.getSeedUserData(getActivity());
-            mProgressBar.setVisibility(View.VISIBLE);
-            Handler h = new Handler();
-            //Delay to simulate n/w call
-            h.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mProgressBar.setVisibility(View.GONE);
-                    if (checkIfUserIsValid(userName, password) && mCallback != null) {
-                        mCallback.signInSuccess(userName);
-                    } else {
-                        mLoginError.setVisibility(View.VISIBLE);
-                        mShowError = true;
-                    }
-                }
-            }, 500);
+        if (TextUtils.isEmpty(userName)) {
+            tvUserNameError.setVisibility(View.VISIBLE);
+            etUsername.requestFocus();
+            mShowUserError = true;
+            return;
         }
+        if (TextUtils.isEmpty(password)) {
+            tvPwdError.setVisibility(View.VISIBLE);
+            etPassword.requestFocus();
+            mShowPwdError = true;
+            return;
+        }
+        boolean rememberMe = cbRememberMe.isChecked();
+        if (rememberMe) {
+            RememberedData.setUserEmail(userName);
+        } else {
+            RememberedData.setUserEmail("");
+        }
+        mUserStore = Helpers.getSeedUserData(getActivity());
+        mProgressBar.setVisibility(View.VISIBLE);
+        Handler h = new Handler();
+        //Delay to simulate n/w call
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mProgressBar.setVisibility(View.GONE);
+                if (checkIfUserIsValid(userName, password) && mCallback != null) {
+                    mCallback.signInSuccess(userName);
+                } else {
+                    mLoginError.setVisibility(View.VISIBLE);
+                    mShowError = true;
+                }
+            }
+        }, 500);
+
     }
 
     private boolean checkIfUserIsValid(String userName, String pwd) {
@@ -169,6 +199,8 @@ public class LoginFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putBoolean(IS_REMEMBERED, !TextUtils.isEmpty(mRememberedName));
         outState.putBoolean(SHOW_ERROR, mShowError);
+        outState.putBoolean(SHOW_U_ERROR, mShowUserError);
+        outState.putBoolean(SHOW_P_ERROR, mShowPwdError);
         outState.putString(USER_EMAIL, etUsername.getText().toString());
         outState.putString(USER_PWD, etPassword.getText().toString());
     }

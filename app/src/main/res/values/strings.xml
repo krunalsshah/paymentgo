@@ -3,7 +3,7 @@
     <string name="app_login">Login</string>
     <string name="app_pay_result">Payment Result</string>
     <string name="hint_email">Email</string>
-    <string name="hint_name_company">Enter Name of Company</string>
+    <string name="hint_name_company">Enter Name</string>
     <string name="hint_amount">Enter Amount $</string>
     <string name="hint_label_pwd">Password</string>
     <string name="cb_remember_me">Remember Email </string>
@@ -11,12 +11,14 @@
     <string name="bt_pay">PAY</string>
     <string name="bt_pay_stripe">STRIPE PAY</string>
     <string name="login_error">Wrong Login Information, Try Again!</string>
+    <string name="login_user_error">Enter Email</string>
+    <string name="login_pwd_error">Enter Password</string>
+    <string name="pay_name_error">Enter Name</string>
     <string name="welcome_msg">Welcome</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="navigation_drawer_open">Drawer Open</string>
     <string name="navigation_drawer_close">Drawer Close</string>
     <string name="endingIn">Card ending in </string>
-    <string name="validationErrors">Validation Errors</string>
     <string name="expDate">MM/YYYY</string>
     <string name="cardNumber">Card Number</string>
     <string name="cvc">CVC</string>

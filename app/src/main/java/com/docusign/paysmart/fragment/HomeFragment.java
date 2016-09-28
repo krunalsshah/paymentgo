@@ -27,14 +27,23 @@ import butterknife.OnClick;
 public class HomeFragment extends Fragment {
     public static final String TAG = HomeFragment.class.getSimpleName();
     private static String USER_EMAIL = "userEmail";
+    private static String SHOW_NAME_ERROR = "nameError";
+    private static String SHOW_AMOUNT_ERROR = "amountError";
     @BindView(R.id.tv_welcome)
     TextView mTvWelcome;
     @BindView(R.id.ivInvoice)
     ImageView mIvInvoice;
+    @BindView(R.id.etName)
+    EditText mEtName;
     @BindView(R.id.etAmount)
     EditText mEtAmt;
     @BindView(R.id.btPay)
     Button mBtPay;
+    @BindView(R.id.tvNameError)
+    TextView tvNameError;
+    @BindView(R.id.tvAmtError)
+    TextView tvAmtError;
+    boolean mShowNameError, mShowAmtError;
     private String mUserEmail;
     private HomeFragmentListener mCallback;
 
@@ -79,6 +88,12 @@ public class HomeFragment extends Fragment {
             if (mUserEmail != null) {
                 mTvWelcome.setText(getResources().getText(R.string.welcome_msg) + " " + mUserEmail.substring(0, mUserEmail.indexOf("@")) + "!!");
             }
+            if (savedInstanceState.getBoolean(SHOW_NAME_ERROR) == true) {
+                tvNameError.setVisibility(View.VISIBLE);
+            }
+            if (savedInstanceState.getBoolean(SHOW_AMOUNT_ERROR) == true) {
+                tvAmtError.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -91,6 +106,8 @@ public class HomeFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(USER_EMAIL, mUserEmail);
+        outState.putBoolean(SHOW_NAME_ERROR, mShowNameError);
+        outState.putBoolean(SHOW_AMOUNT_ERROR, mShowAmtError);
     }
 
     @Override
@@ -113,6 +130,8 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.btPay)
     public void payClicked() {
+        mShowNameError = false;
+        mShowAmtError = false;
         if (!isFormValid()) {
             return;
         }
@@ -122,8 +141,15 @@ public class HomeFragment extends Fragment {
     }
 
     private boolean isFormValid() {
+        if (TextUtils.isBlank(mEtName.getText().toString())) {
+            mShowNameError = true;
+            tvNameError.setVisibility(View.VISIBLE);
+            mEtName.requestFocus();
+            return false;
+        }
         if (TextUtils.isBlank(mEtAmt.getText().toString())) {
-            mEtAmt.setError(getResources().getString(R.string.amount_error));
+            mShowAmtError = true;
+            tvAmtError.setVisibility(View.VISIBLE);
             mEtAmt.requestFocus();
             return false;
         }

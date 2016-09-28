@@ -84,6 +84,7 @@ public class PayFragment extends Fragment {
         );
     }
 
+    //TODO Migrate to Material Error Handling
     private boolean isFormValid() {
         if (TextUtils.isBlank(mEditTextCardNum.getText().toString())) {
             mEditTextCardNum.setError(getResources().getString(R.string.cardNumber_error));

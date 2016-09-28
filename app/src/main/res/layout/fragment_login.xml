@@ -8,7 +8,7 @@
     android:focusableInTouchMode="true">
 
     <TextView
-        android:id="@+id/tv_error"
+        android:id="@+id/tvError"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/fifteen_dp"
@@ -22,30 +22,51 @@
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_error"
+        android:layout_below="@id/tvError"
         android:layout_margin="@dimen/five_dp"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:textColor="@color/dark_grey"
         android:textSize="@dimen/fifteen_sp" />
 
+    <TextView
+        android:id="@+id/tvUserNameError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etUsername"
+        android:layout_marginLeft="@dimen/eight_dp"
+        android:text="@string/login_user_error"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="@dimen/ten_sp"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etUsername"
+        android:layout_below="@+id/tvUserNameError"
         android:layout_margin="@dimen/five_dp"
         android:hint="@string/hint_label_pwd"
         android:inputType="textPassword"
         android:textColor="@color/dark_grey"
         android:textSize="@dimen/fifteen_sp" />
 
+    <TextView
+        android:id="@+id/tvPwdError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPassword"
+        android:layout_marginLeft="@dimen/eight_dp"
+        android:text="@string/login_pwd_error"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="@dimen/ten_sp"
+        android:visibility="gone" />
+
     <CheckBox
         android:id="@+id/cbRememberMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etPassword"
+        android:layout_below="@+id/tvPwdError"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_margin="@dimen/five_dp"
@@ -62,8 +83,7 @@
         android:layout_marginTop="@dimen/seventy_dp"
         android:indeterminate="true"
         android:indeterminateTint="@color/colorAccent"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btPrimaryAction"

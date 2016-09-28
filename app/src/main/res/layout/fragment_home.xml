@@ -56,6 +56,16 @@
                     android:textColorHint="@color/dark_grey"
                     android:textSize="@dimen/fifteen_sp" />
 
+                <TextView
+                    android:id="@+id/tvNameError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/eight_dp"
+                    android:text="@string/pay_name_error"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="@dimen/ten_sp"
+                    android:visibility="gone" />
+
                 <EditText
                     android:id="@+id/etAmount"
                     android:layout_width="match_parent"
@@ -67,6 +77,17 @@
                     android:textColor="@color/dark_grey"
                     android:textColorHint="@color/dark_grey"
                     android:textSize="@dimen/fifteen_sp" />
+
+
+                <TextView
+                    android:id="@+id/tvAmtError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/eight_dp"
+                    android:text="@string/amount_error"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="@dimen/ten_sp"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btPay"
