@@ -30,7 +30,7 @@ The app integrates with Stripe to make invoice payment. Find more details - http
 	        *   User Profile header
 
 ####Collect Payment [Bonus]
-    -   Custom Form for collecting card information
+    ⁃	Custom Form for collecting card information
     ⁃	Inline Validation
     ⁃	Auto formatting expiration date
     ⁃	Integration with Stripe
@@ -42,7 +42,11 @@ The app integrates with Stripe to make invoice payment. Find more details - http
     -   Feedback to user on success of invoice payment
 	-  	Done button to take user back to login page
 
-### Todos
+###Video
+
+Link to Video - https://github.com/krunalsshah/paymentgo/blob/master/stripe-payment-demo.mp4
+
+###Extensions
 	-   Unit Test
 	-	UI Automation Test
 	-	Payment History
